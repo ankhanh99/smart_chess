@@ -1,0 +1,91 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Game Levels</title>
+    <style>
+      body {
+        background-image: url('img/background2.jpg');
+        background-size: 100vw 100vh;
+        resize: both;
+      }
+
+      .container {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -200px;
+				margin-left: -230px;
+				width: 450px;
+				height: 320px;
+        padding: 3%;
+				border: px solid #000;
+				border-radius: 12px;
+				-moz-border-radius: 12px;
+				background-color: aliceblue;
+			}
+
+      #easy {
+				display: inline-block;
+				background-color: #4CAF50; /* Green */
+				border: none;
+				border-radius: 20px;
+				color: white;
+				padding: 10px 32px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+				margin: 2px 1px;
+				cursor: pointer;
+				width: 200px;
+			}
+
+      #medium {
+				display: inline-block;
+				background-color: #FFFF00; /* Yellow */
+				border: none;
+				border-radius: 20px;
+				color: white;
+				padding: 10px 32px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+				margin: 2px 1px;
+				cursor: pointer;
+				width: 200px;
+			}
+    </style>
+  </head>
+
+  <script>
+    socket = null;
+    $(function(){
+      socket = io();
+      $("#easy").on("click", function() {
+        console.log("Easy");
+        window.location.replace('/game_page/?difficulty=easy');
+      });
+
+      $("#medium").on("click", function() {
+        console.log("Medium");
+        window.location.replace('/game_page/?difficulty=medium');
+      });
+    });
+  </script>
+
+  <body>
+    <div class="container">
+      <center>
+        <h2>Choose A Game Level</h2>
+        <div>
+          <button id="easy">Easy</button>
+          <button id="medium">Medium</button>
+        </div>
+      </center>
+    </div>
+  </body>
+</html>

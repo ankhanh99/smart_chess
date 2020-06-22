@@ -1,6 +1,9 @@
 const assert = require('chai').assert;
 const {Chess, Piece, Pos, ChessRules} = require('../chess.js');
 const RequestHandler = require('../requestHandler.js');
+const Minimax = require('../minimax.js');
+const MinimaxAlphaBeta = require('../minimax_alpha_beta.js');
+var expect  = require('chai').expect;
 
 
 describe('Individual Components Unit Test', function(){
@@ -619,8 +622,31 @@ describe('Individual Components Unit Test', function(){
       king.available_moves = move;
       assert.equal(chess_game.is_valid_chess_move(4, 3, king), false);
     });
-  //});
 
+  });
+
+});
+
+describe('Generate Possible Boards by AI', function(){
+  it('Generate Possible Boards', function(){
+    var chess = new Chess(8, null, false);
+    var tmp = chess.generate_possible_boards(true);
+    assert.equal(tmp.length, 20);
+  });
+
+  it('Minimax Test', function(){
+    var chess = new Chess(8, null, false);
+    var minimax_player = new Minimax(chess);
+    var ans = minimax_player.minimaxDecision();
+    var num_value = ans[0];
+    expect(num_value).to.be.within(-1,1);
+  });
+
+  it('Minimax Alpha Beta Test', function(){
+    var chess = new Chess(8, null, false);
+    var minimax_player = new Minimax(chess);
+    var num_value = minimax_player.minimaxDecision()[0];
+    expect(num_value).to.be.within(-1,1);
   });
 
 });

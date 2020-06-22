@@ -1,0 +1,113 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Menu</title>
+
+    <style>
+      body {
+        background-image: url('img/background2.jpg');
+        background-size: 100vw 100vh;
+        resize: both;
+      }
+
+      .container {
+				position: absolute;
+				top: 50%;
+				left: 45%;
+				margin-top: -200px;
+				margin-left: -250px;
+				width: 450px;
+				height: 320px;
+        padding: 5%;
+				border: px solid #000;
+				border-radius: 12px;
+				-moz-border-radius: 12px;
+				background-color: aliceblue;
+			}
+
+      #go_back_to_launch_page {
+				display: inline-block;
+				background-color: #4CAF50; /* Green */
+				border: none;
+				border-radius: 20px;
+				color: white;
+				padding: 10px 32px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+				margin: 2px 1px;
+				cursor: pointer;
+				width: 200px;
+			}
+
+      #play_with_human {
+				display: inline-block;
+				background-color: #4CAF50; /* Green */
+				border: none;
+				border-radius: 20px;
+				color: white;
+				padding: 10px 32px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+				margin: 2px 1px;
+				cursor: pointer;
+				width: 200px;
+			}
+
+      #play_with_bot {
+				display: inline-block;
+				background-color: #4CAF50; /* Green */
+				border: none;
+				border-radius: 20px;
+				color: white;
+				padding: 10px 32px;
+				text-align: center;
+				text-decoration: none;
+				font-size: 15px;
+				margin: 2px 1px;
+				cursor: pointer;
+				width: 200px;
+			}
+    </style>
+  </head>
+
+  <script>
+    socket = null;
+    $(function(){
+      socket = io();
+      $("#go_back_to_launch_page").on("click", function() {
+        console.log("Go back to the Launch Page");
+        window.location.replace('/home');
+      });
+
+      $("#play_with_human").on("click", function() {
+        console.log("Play with Human");
+        window.location.replace('/game_page');
+      })
+
+      $("#play_with_bot").on("click", function() {
+        console.log("Play with Bot");
+        window.location.replace('/level_options')
+      })
+    });
+  </script>
+
+  <body>
+    <div class="container">
+      <center>
+        <h2>Select Options:</h2>
+        <div>
+          <button id="play_with_bot">Play With Bot</button>
+          <button id="play_with_human">Play With Human Players</button>
+          <button id="go_back_to_launch_page">Go Back</button>
+        </div>
+      </center>
+    </div>
+  </body>
+</html>

@@ -121,7 +121,18 @@ class Chess{
     this.current_pieces.delete(piece);
     return [true, "Success!"];
   }
-  move(row, col, next_row, next_col){
+  move(row, col, next_row, next_col, change_turn=false){
+    if (change_turn)
+      this.p1_turn = !this.p1_turn;
+
+    for (var i=0; i<this.size; i++) {
+      for (var j=0; j<this.size; j++) {
+        if (this.board[i][j] === undefined) {
+          this.board[i][j] = null;
+        }
+      }
+    }
+
     var check_status_result = this.is_game_end();
     if(check_status_result[0]){
       return [false, check_status_result[1]];
@@ -157,7 +168,6 @@ class Chess{
     this.check_pawn_promotion(next_row, next_col);
     this.sync_avail_moves();
     this.sync_game_status();
-
 
     return [true, "Success move!"];
   }
@@ -280,6 +290,28 @@ class Chess{
     return new Chess(this.size, pieces, new Set(this.removed_pieces_p1), new Set(this.removed_pieces_p2), this.p1_turn );
   }
 
+  generate_possible_boards(switch_turn=false) {
+    var total_size = this.size;
+    var board = this.board;
+    var player_turn = this.p1_turn;
+    var boards = [];
+    for (var i=0; i<total_size; i++) {
+      for (var j=0; j<total_size; j++) {
+        var piece = board[i][j];
+        if (piece != null && piece.is_player1 == player_turn) {
+            var piece_possible_moves = piece.available_moves;
+            for (var id=0; id<piece_possible_moves.length; id++) {
+                var next_row = piece_possible_moves[id].row;
+                var next_col = piece_possible_moves[id].col;
+                var board_tmp = this.clone();
+                var tmp = board_tmp.move(i, j, next_row, next_col, switch_turn);
+                boards.push(board_tmp);
+            }
+        }
+      }
+    }
+    return boards;
+  }
 }
 
 class Piece{
@@ -336,7 +368,6 @@ class ChessRules{
     }
   }
   static is_valid_pos(row, col, board){
-
     if(row < 0 || col < 0 || row >= board.length || col >= board.length)
       return false;
     return true;

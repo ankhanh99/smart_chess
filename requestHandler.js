@@ -14,7 +14,7 @@ class RequestHandler{
   authenticate_user(user_id){ //public
     return this.ROOM_MANAGER.authenticate_user(user_id);
   }
-  join_room(user_id, room_id, username){ //public
+  join_room(user_id, room_id, username, level){ //public
     return this.ROOM_MANAGER.join_room(user_id, room_id, username);
   }
   get_user_room(user_id){ //public
@@ -37,6 +37,21 @@ class RequestHandler{
       };
 
     return this.GAME_MANAGER.make_move(move_string, user_id, room);
+  }
+  make_move_AI(difficulty, user_id){
+    var auth_result = this.ROOM_MANAGER.authenticate_user(user_id);
+    if(!auth_result.success)
+      return auth_result;
+
+    var room = this.ROOM_MANAGER.get_user_room(user_id);
+
+    if(room == null)
+      return {
+        success: false,
+        msg: "You did not enter a room!"
+      };
+
+    return this.GAME_MANAGER.make_move_AI(difficulty, user_id, room);
   }
   is_player1(user_id){ //public
     var room = this.get_user_room(user_id);

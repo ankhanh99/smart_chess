@@ -1,3 +1,6 @@
+const Minimax = require('./minimax.js');
+const MinimaxAlphaBeta = require('./minimax_alpha_beta.js');
+
 class GameManager{
   constructor(request_handler){
     this.REQUEST_HANDLER = request_handler;
@@ -19,7 +22,7 @@ class GameManager{
         success: false,
         msg: "Invalid room"
       };
-      
+
     if(room.p1 != user_id && room.p2 != user_id)
       return {
         success: false,
@@ -65,11 +68,37 @@ class GameManager{
 
     var result = game.move(move[0], move[1], move[2], move[3]);
 
-    //console.log(result);
-
     return {
       success: result[0],
       msg: result[1]
+    };
+  }
+  make_move_AI(difficulty, user_id, room){
+    var game;
+    var status;
+    var message;
+    if (difficulty == 'easy'){
+      game = new Minimax(room.chess);
+      status = game.minimaxDecision();
+    } else if (difficulty == 'medium') {
+      game = new MinimaxAlphaBeta(room.chess);
+      status = game.minimax_AlphaBeta_decision();
+    }
+
+    var terminal_value = status[0];
+
+    if (terminal_value == 0)
+      message = "AI Makes a Success Move";
+    else if (terminal_value == -1)
+      message = "Draw";
+    else if (terminal_value == 1)
+      message = "You Win";
+    else
+      message = "AI Wins";
+
+    return {
+      board: status[1],
+      msg: message
     };
   }
 }
