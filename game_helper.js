@@ -252,6 +252,7 @@ $(function(){
   });
   socket.on('chat message', function(data){
       var audience;
+      var seperator = document.createElement('br');
       if (clientId === data.clientsId) { //sender
         color = 'blueText';
         audience = "You: ";
@@ -261,6 +262,7 @@ $(function(){
       }
       document.getElementById('typing').innerText = "";
       $('#messages').append($('<li class="' + color + '">').text(audience + data.message));
+      $('#messages').append(seperator);
       window.scrollTo(0, document.body.scrollHeight);
       $("#messenger").val('');
       openForm();
