@@ -255,13 +255,15 @@ $(function(){
       var seperator = document.createElement('br');
       if (clientId === data.clientsId) { //sender
         color = 'blueText';
-        audience = "You: ";
+        document.getElementById('messages').style.MozTextAlignLast = "right"; // Code for Firefox
+        document.getElementById('messages').style.textAlignLast = "right";
       } else { //receiver
         color = 'greenText';
-        audience = "Your Opponent: "
+        document.getElementById('messages').style.MozTextAlignLast = "left"; // Code for Firefox
+        document.getElementById('messages').style.textAlignLast = "left";
       }
       document.getElementById('typing').innerText = "";
-      $('#messages').append($('<li class="' + color + '">').text(audience + data.message));
+      $('#messages').append($('<span class="' + color + '">').text(data.message));
       $('#messages').append(seperator);
       window.scrollTo(0, document.body.scrollHeight);
       $("#messenger").val('');

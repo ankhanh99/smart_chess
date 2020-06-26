@@ -18,6 +18,14 @@ body { font: "Times New Roman", Times, serif;
   width: 280px;
 }
 
+#bt {
+  position:absolute;
+  transition: .5s ease;
+  left: 90%;
+  border: none;
+  background-color: #fff;
+}
+
 /* Add styles to the form container */
 .form-container {
   display: none;
@@ -35,10 +43,11 @@ body { font: "Times New Roman", Times, serif;
 .form-container .btn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px 20px;
+  padding: 12px 15px;
   border: none;
   cursor: pointer;
   width: 100%;
+  height: 70%;
   margin-bottom:10px;
   opacity: 0.8;
 }
@@ -55,6 +64,7 @@ body { font: "Times New Roman", Times, serif;
 
 #messages{
   background-color: #FFFFFF;
+  height: auto;
 }
 
 #chessBoard{
@@ -126,10 +136,12 @@ ul {
 
 .blueText {
     background-color: #00FFFF;
+    float: right;
 }
 
 .greenText {
     background-color: #00FF00;
+    float: left;
 }
 
 buttonbox {
