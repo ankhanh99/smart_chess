@@ -222,8 +222,6 @@ io.on('connection', function(socket){
       var room = request_handler.get_user_room(user_id);
       room.chess = move_result.board;
       var message = move_result.msg;
-      // console.log(room.chess.p1_turn);
-      // room.chess.p1_turn = turn;
       var response = get_response(true, null, {details: room, is_p1: turn, msg: message});
       io.in(room.room_number).emit('render', response); //send to all clients in the room, including the sender
   });

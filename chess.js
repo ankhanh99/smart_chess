@@ -72,7 +72,7 @@ class Chess{
   }
   is_game_end(){
     if(this.game_status == this.DRAW)
-      return [true, "Draw Game!"];
+      return [true, "Stalemate!"];
     if(this.game_status == this.P1_WIN)
       return [true, "P1 Win!"];
     if(this.game_status == this.P2_WIN)

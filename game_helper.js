@@ -23,6 +23,7 @@ $(function(){
   var p2_username = null;
   var typing;
   var human_move;
+  var success = null;
 
   function get_pos_id(row, col){
     return row + "," + col;
@@ -114,12 +115,15 @@ $(function(){
     if(is_your_turn()){
       $("#turn").html("Your turn");
     }
-    else{
-      $("#turn").html("The other player turn");
+    else {
+      if (room.chess.game_status != room.chess.ONGOING) //ONGOING
+        $("#turn").html("Game Over");
+      else
+        $("#turn").html("The other player turn");
     }
 
     var p1_side = "You : ";
-    var p2_side = "Your Opponent : "
+    var p2_side = "Your Opponent : ";
     var p1_color = 'green';
     var p2_color = 'red';
     p1_username = room.p1_username;
@@ -223,7 +227,6 @@ $(function(){
     update_status(response.error);
   });
   socket.on('render', function(response){ //human's turn switches to AI's turn
-    // console.log("Request to render", response)
     room = response.data.details;
     msg = response.data.msg;
     is_p1 = response.data.is_p1;
@@ -255,15 +258,12 @@ $(function(){
       var seperator = document.createElement('br');
       if (clientId === data.clientsId) { //sender
         color = 'blueText';
-        document.getElementById('messages').style.MozTextAlignLast = "right"; // Code for Firefox
-        document.getElementById('messages').style.textAlignLast = "right";
       } else { //receiver
         color = 'greenText';
-        document.getElementById('messages').style.MozTextAlignLast = "left"; // Code for Firefox
-        document.getElementById('messages').style.textAlignLast = "left";
       }
       document.getElementById('typing').innerText = "";
       $('#messages').append($('<span class="' + color + '">').text(data.message));
+      // $('#messages').append('</span>');
       $('#messages').append(seperator);
       window.scrollTo(0, document.body.scrollHeight);
       $("#messenger").val('');
