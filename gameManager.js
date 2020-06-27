@@ -85,7 +85,7 @@ class GameManager{
       status = game.minimax_AlphaBeta_decision();
     }
 
-    message = "AI has just made a move";
+    message = "AI has just made a move.";
 
     return {
       board: status[1],
