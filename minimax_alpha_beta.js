@@ -17,7 +17,7 @@ class MinimaxAlphaBeta extends Minimax {
     minimax_AlphaBeta_decision() {
         var curBoard = this.board;
         var curValue = -INFINITY;
-        var depth = 2;
+        var depth = 7;
         var possible_boards = curBoard.generate_possible_boards(true);
         for (var i=0; i<possible_boards.length; i++) {
             var updateValue = this.min_value(depth-1, possible_boards[i], this.alpha, this.beta);

@@ -85,16 +85,7 @@ class GameManager{
       status = game.minimax_AlphaBeta_decision();
     }
 
-    var terminal_value = status[0];
-
-    if (terminal_value == 0)
-      message = "AI Makes a Success Move";
-    else if (terminal_value == -1)
-      message = "Draw";
-    else if (terminal_value == 1)
-      message = "You Win";
-    else
-      message = "AI Wins";
+    message = "AI has just made a move";
 
     return {
       board: status[1],
