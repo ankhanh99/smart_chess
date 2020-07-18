@@ -263,7 +263,6 @@ $(function(){
       }
       document.getElementById('typing').innerText = "";
       $('#messages').append($('<span class="' + color + '">').text(data.message));
-      // $('#messages').append('</span>');
       $('#messages').append(seperator);
       window.scrollTo(0, document.body.scrollHeight);
       $("#messenger").val('');
@@ -273,10 +272,10 @@ $(function(){
       var chat_name = null;
       var sender_name = null;
 
-      if (socket.id != data.id && data.name1 != null && data.name2 != null) {
+      if (socket.id != data.id) {
         chat_name = data.name2;
         sender_name = data.name1;
-      } else if (socket.id == data.id && data.name1 != null && data.name2 != null) {
+      } else if (socket.id == data.id) {
         chat_name = data.name1;
         sender_name = data.name2;
       }
