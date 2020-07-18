@@ -275,7 +275,7 @@ $(function(){
       if (socket.id != data.id) {
         chat_name = data.name2;
         sender_name = data.name1;
-      } else if (socket.id == data.id) {
+      } else {
         chat_name = data.name1;
         sender_name = data.name2;
       }
